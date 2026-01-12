@@ -17,6 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from rest_framework.routers import DefaultRouter
+from rest_framework import viewsets
+
+from news.models.news import NewsItem
+from news.serializers.news import NewsItemSerializer
+
+class NewsViewSet(viewsets.ModelViewSet) :
+    queryset = NewsItem.objects.all()
+    serializer_class = NewsItemSerializer
+
+router = DefaultRouter()
+router.register(r'news', NewsViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('v1/common/welcome/', HelloWorldView.as_view(), name='helloWorld'),
@@ -24,5 +37,7 @@ urlpatterns = [
     # path('v1/samples/<int:sample_id>', SampleDetailView.as_view(), name='sampleDetail')
     path('v1/common/', include('news.urls.common')),
     path('v1/samples/', include('news.urls.sample')),
-    path('v1/user/', include('news.urls.user'))
+    path('v1/user/', include('news.urls.user')),
+    path('v1/news/', include('news.urls.news')),
+    path('api/', include(router.urls))
 ]

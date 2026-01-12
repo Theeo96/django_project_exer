@@ -1,0 +1,5 @@
+*/__pycache__
+__pycache__
+apis/v1/__pycache__/
+news/apis/v1/__pycache__/
+project/__pycache__/

@@ -3,9 +3,17 @@ from rest_framework.views import APIView
 
 from news.models import Sample
 
+from news.models.news import NewsItem
+from news.serializers.news import NewsItemSerializer
+
 class SampleListView(APIView):
 
     def get(self, request):
+
+        # news_item_queryset = NewsItem.objects.all()[:10]
+        # serializer = NewsItemSerializer(news_item_queryset, many=True)
+
+        # response_json = serializer.data
 
         sample_queryset = Sample.objects.all()
 

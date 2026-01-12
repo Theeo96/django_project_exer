@@ -65,7 +65,11 @@ def news_parser() :
             "guid": item.get("id"),
             "description": item.get("summary"),
             "source_title": item.get("source", {}).get("title"),
-            "source_url": item.get("source", {}).get("href")
+            "source_url": item.get("source", {}).get("href"),
+            "created_at": datetime.fromtimestamp(
+                float(item.get("published_parsed").tm_sec),
+                pytz.timezone("Asia/Seoul")
+            ) if item.get("published_parsed") else None,
         }
         print("ITEM DATA:", item_data)
 
